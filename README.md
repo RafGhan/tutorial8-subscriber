@@ -19,4 +19,10 @@ AMQP(Advanced Message Queuing Protocol) adalah sebuah  protokol standar dalam la
 
 # Slow Subscriber
 ![alt text](./img/image.png)
-Dapat dilihat dari screenshot diatas, terdapat 30 queued message. Hal tersebut terjadi karena saya menjalankan `cargo run` sebanyak 6 kali. Pada `cargo run` pertama, message masih dapat diproses secara langsung, tetapi 5 sisanya harus masuk ke queue karena terdapat `thread::sleep(ten_millis);` yang membuat penumpukan pesan dalam antrian sebelum diproses lebih lanjut. 
+Dapat dilihat dari screenshot diatas, terdapat 30 queued messages. Hal tersebut terjadi karena saya menjalankan `cargo run` sebanyak 6 kali pada publisher. Pada `cargo run` pertama, message masih dapat diproses secara langsung, tetapi 5 sisanya harus masuk ke queue karena terdapat `thread::sleep(ten_millis);` yang membuat penumpukan pesan dalam antrian sebelum diproses lebih lanjut. 
+
+# Reflection and Running three subscribers.
+![alt text](./img/image1.png)
+![alt text](./img/image2.png)
+
+Dapat dilihat bahwa dengan menjalankan 3 subscriber yang berbeda dan tetap menjalankan 6 kali pada publisher, grafik queued messages mengalami penurunan dari yang sebelumnya 30 queued messages menjadi 2 queue messages saja. Dengan adanya lebih dari 1 subscriber, pesan dapat diproses secara paralel yang membuat distribusi beban kerja lebih merata dan mempercepat waktu response dalam memroses pesan yang masuk.

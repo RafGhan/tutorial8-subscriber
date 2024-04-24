@@ -16,3 +16,7 @@ AMQP(Advanced Message Queuing Protocol) adalah sebuah  protokol standar dalam la
 
 * `guest:guest`: bagian ini merepresentasikan kredensial(`guest` pertama merujuk ke username dan `guest`merujuk ke password) yang digunakan untuk autentikasi.
 * `@localhost:5672`: merujuk pada alamat hostname dan port number dari server dimana merupakan tempat broker AMQP berjalan. `localhost` mengacu pada mesin lokal dan `5672` adalah nomor port default untuk komunikasi AMQP. 
+
+# Slow Subscriber
+![alt text](./img/image.png)
+Dapat dilihat dari screenshot diatas, terdapat 30 queued message. Hal tersebut terjadi karena saya menjalankan `cargo run` sebanyak 6 kali. Pada `cargo run` pertama, message masih dapat diproses secara langsung, tetapi 5 sisanya harus masuk ke queue karena terdapat `thread::sleep(ten_millis);` yang membuat penumpukan pesan dalam antrian sebelum diproses lebih lanjut. 
